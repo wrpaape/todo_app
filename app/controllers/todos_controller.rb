@@ -1,7 +1,17 @@
 class TodosController < ApplicationController
 
-  def create
+  def index
+    all_todo = Todo.all
+    render_response(all_todo, 200)
+  end
+
+  def new
     new_todo = Todo.create
+    render_response(new_todo, 200)
+  end
+
+  def create
+    new_todo = Todo.create(body: params[:body])
     render_response(new_todo, 200)
   end
 
@@ -28,10 +38,6 @@ class TodosController < ApplicationController
     end
   end
 
-  def index
-    all_todo = Todo.all
-    render_response(all_todo, 200)
-  end
 
   def not_found
     response = []

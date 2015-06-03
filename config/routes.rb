@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  get 'todos/new', to: 'todos#create'
+  get 'todos/new', to: 'todos#new'
 
   get 'todos/:id', to: 'todos#show'
 
