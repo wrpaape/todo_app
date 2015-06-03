@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+
+  namespace :todos do
+
+    post '/new', to: 'todos#create'
+
+    get '/:id', to: 'todos#show'
+
+    delete '/:id', to: 'todos#destroy'
+
+    get ':nothing', to: 'users#index'
+
+    post ':params', to: 'users#create'
+
+  end
+
+
+  # When a GET request comes to the URL /use
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
