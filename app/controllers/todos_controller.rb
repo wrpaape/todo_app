@@ -26,6 +26,20 @@ class TodosController < ApplicationController
     end
   end
 
+  def update
+    begin
+      todo = Todo.find(params[:id])
+      todo.completed = params[:completed] if params[:completed]
+      todo.body = params[:body] if params[:body]
+      todo.save
+      render_response(todo, 200)
+    rescue ActiveRecord::RecordNotFound => error
+      render_response(error.message, 404)
+    rescue StandardError => error
+      render_response(error.message, 422)
+    end
+  end
+
   def destroy
     begin
       todo = Todo.find(params[:id])
