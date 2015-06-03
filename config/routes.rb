@@ -1,18 +1,17 @@
 Rails.application.routes.draw do
 
-  namespace :todos do
 
-    post '/new', to: 'todos#create'
+  get 'todos/new', to: 'todos#create'
 
-    get '/:id', to: 'todos#show'
+  get 'todos/:id', to: 'todos#show'
 
-    delete '/:id', to: 'todos#destroy'
+  delete 'todos/:id', to: 'todos#destroy'
 
-    get ':nothing', to: 'users#index'
+  get 'todos', to: 'todos#index'
 
-    post ':params', to: 'users#create'
+  post 'todos', to: 'todos#create'
 
-  end
+
 
 
   # When a GET request comes to the URL /use

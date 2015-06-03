@@ -10,9 +10,9 @@ class TodosController < ApplicationController
       todo = Todo.find(params[:id])
       render_response(todo, 200)
     rescue ActiveRecord::RecordNotFound => error
-      render_response(error, 404)
+      render_response(error.message, 404)
     rescue StandardError => error
-      render_response(error, 422)
+      render_response(error.message, 422)
     end
   end
 
@@ -22,9 +22,9 @@ class TodosController < ApplicationController
       todo.destroy
       render_response("deleted", 200)
     rescue ActiveRecord::RecordNotFound => error
-      render_response(error, 404)
+      render_response(error.message, 404)
     rescue StandardError => error
-      render_response(error, 422)
+      render_response(error.message, 422)
     end
   end
 
