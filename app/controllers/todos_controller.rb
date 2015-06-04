@@ -1,8 +1,20 @@
 class TodosController < ApplicationController
 
   def index
-    all_todo = Todo.all
-    render_response(all_todo, 200)
+    begin
+      if params[:id] || params[:body] || params[:completed]
+        todo_match = Todo.new
+        response, response_code = todo_match.get(params)
+        render_response(response, response_code)
+      else
+        all_todos = Todo.all
+        render_response(all_todos, 200)
+      end
+      rescue ActiveRecord::RecordNotFound => error
+        render_response(error.message, 404)
+      rescue StandardError => error
+        render_response(error.message, 422)
+    end
   end
 
   def new
@@ -17,8 +29,9 @@ class TodosController < ApplicationController
 
   def show
     begin
-      todo = Todo.find(params[:id])
-      render_response(todo, 200)
+      todo_match = Todo.new
+      response, response_code = todo_match.get(params)
+      render_response(response, response_code)
     rescue ActiveRecord::RecordNotFound => error
       render_response(error.message, 404)
     rescue StandardError => error
